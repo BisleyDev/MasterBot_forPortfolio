@@ -1,0 +1,20 @@
+{
+  "name": "master",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "net": "^1.0.2",
+    "node-binance-api": "^0.12.1",
+    "node-fetch": "^2.6.1",
+    "node-telegram-bot-api": "^0.50.0",
+    "talib": "^1.1.3"
+  }
+}

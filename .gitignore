@@ -1,0 +1,6 @@
+tests/
+*.txt
+.git
+*Test.js
+initData.js
+node_modules/
