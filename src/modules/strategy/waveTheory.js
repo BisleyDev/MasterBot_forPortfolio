@@ -30,10 +30,6 @@ async function waveTheory() {
 	console.log('Start check wave theory');
 	try {
 		const tradeHistory = await getLastCompliteTrade();
-		console.log(
-			'🚀 ~ file: waveTheory.js ~ line 33 ~ waveTheory ~ tradeHistory',
-			tradeHistory.slice(0, 5)
-		);
 
 		if (!tradeHistory[0]) {
 			setTimeout(() => {
@@ -43,7 +39,7 @@ async function waveTheory() {
 		}
 
 		const lastOrder = tradeHistory[0];
-		let rate = +checkTradeHistory(tradeHistory).toFixed(roundRate);
+		let rate = +checkTradeHistory(tradeHistory);
 		const isOneTimeOrdersComplite =
 			tradeHistory[0].time - tradeHistory[1].time < 5 * 60 * 1000;
 

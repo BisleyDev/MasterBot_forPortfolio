@@ -1,4 +1,5 @@
 'use strict';
+// Hello
 
 const getHistoryCandles = require('./modules/workWithExchange/getDataFromServer/getHistoryCandles');
 const getValueCandles = require('./modules/strategy/splitPricesCandles');
@@ -47,20 +48,20 @@ async function mainCycle() {
 		}, 15000);
 	}
 }
-
-setTimeout(() => {
-	mainCycle();
-}, 500);
-
-setTimeout(() => {
-	waveTheory();
-}, 2000);
-
+// Test
 // setTimeout(() => {
-// 	waveTheory;
 // 	mainCycle();
-// }, timeFirstStart(intervalCandles, 30));
+// }, 500);
 
 // setTimeout(() => {
 // 	waveTheory();
-// }, timeFirstStart(checkWaveTheory, 15));
+// }, 2000);
+
+setTimeout(() => {
+	waveTheory;
+	mainCycle();
+}, timeFirstStart(intervalCandles, 30));
+
+setTimeout(() => {
+	waveTheory();
+}, timeFirstStart(checkWaveTheory, 15));
