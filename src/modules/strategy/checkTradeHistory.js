@@ -5,7 +5,6 @@ const { firstCoin, roundRate } = require('../config/initData');
 function checkTradeHistory(tradeHistory) {
 	const ordersAmount = tradeHistory.length - 1;
 	let summCoinsBeforeOrders = 0;
-	// summCoinsBeforeOrders = ordersAmount >= 0 ? +tradeHistory[0].qty : 0;
 
 	for (
 		let i = 0;

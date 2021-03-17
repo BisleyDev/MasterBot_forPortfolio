@@ -16,7 +16,7 @@ const buy = async (quantity, text) => {
 		sendInTelegram(message);
 		writeLog('log.txt', message);
 	} catch (e) {
-		console.log('Error in function "MarketBuySell - buy ');
+		console.log('Error in function "MarketBuySell - buy ', e);
 
 		writeLog(
 			'error.txt',

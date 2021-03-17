@@ -2,8 +2,6 @@ const writeLog = require('../utils/writeLog');
 const getTradeHistory = require('../workWithExchange/getDataFromServer/getTradeHistory');
 
 async function getLastCompliteTrade() {
-	// let tradeHistoryWithServer = await getTradeHistory();
-
 	try {
 		let tradeHistoryWithServer = await getTradeHistory();
 		if (!tradeHistoryWithServer.length) {
