@@ -23,8 +23,7 @@ async function mainCycle() {
 		const HistoryCandles = await getHistoryCandles(intervalCandles);
 		const valueCandles = getValueCandles(HistoryCandles);
 		const valuesIndicatorMACD = indicatorMACD(valueCandles.close);
-		// const signalIndicatorMACD = checkSignalIndicatorMACD(valuesIndicatorMACD);
-		const signalIndicatorMACD = 'long';
+		const signalIndicatorMACD = checkSignalIndicatorMACD(valuesIndicatorMACD);
 		signalIndicatorMACD
 			? await placeOrder(
 					signalIndicatorMACD,

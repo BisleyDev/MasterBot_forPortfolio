@@ -4,17 +4,16 @@ const binance = require('../connectToExchange');
 const { pair } = require('../../config/initData');
 const sendInTelegram = require('../../utils/sendInTelegram');
 const writeLog = require('../../utils/writeLog');
+const getPriceNow = require('./getPriceNow');
 
 const buy = async (quantity, text) => {
 	try {
+		const price = getPriceNow();
 		console.log(quantity, text);
 		return new Promise(() => {
-			console.log(pair);
-			const result = binance.marketBuy(pair, quantity);
+			binance.marketBuy(pair, quantity);
 			console.log('🚀 result Buy', result);
-			const message = `\n ${new Date().toLocaleString()} \n Buy ${text}: ${pair} \n Quantity: ${quantity} \n	Price: ${
-				result.fills[0].price
-			}`;
+			const message = `\n ${new Date().toLocaleString()} \n Buy ${text}: ${pair} \n Quantity: ${quantity} \n	Price: ${price}`;
 			sendInTelegram(message);
 			writeLog('log.txt', message);
 		});
@@ -41,12 +40,12 @@ const buy = async (quantity, text) => {
 
 const sell = async (quantity, text) => {
 	try {
+		const price = getPriceNow();
 		console.log(quantity, text);
 		return new Promise(() => {
-			console.log(pair);
-			const result = binance.marketSell(pair, quantity);
+			binance.marketSell(pair, quantity);
 			console.log('🚀 result Sell', result);
-			const message = `Sell ${text}: ${pair} \n Quantity: ${quantity} \n	Price: ${result.fills[0].price}`;
+			const message = `Sell ${text}: ${pair} \n Quantity: ${quantity} \n	Price: ${price}`;
 			sendInTelegram(message);
 			writeLog('log.txt', message);
 		});
@@ -66,7 +65,5 @@ const sell = async (quantity, text) => {
 		}, 10000);
 	}
 };
-
-function totalRebut() {}
 
 module.exports = { buy, sell };
