@@ -19,9 +19,9 @@ const writeLog = require('../utils/writeLog');
 
 async function placeOrder(signal, isDivergence) {
 	try {
+		let quantity = 0;
 		const price = await getPrice();
 		const tradesHistory = await getLastCompliteTrades();
-
 		const summCoinsBeforeOrders = tradesHistory
 			? checkTradeHistory(tradesHistory)
 			: 0;
@@ -32,7 +32,6 @@ async function placeOrder(signal, isDivergence) {
 
 		if (signal === 'short') {
 			console.log('short', price);
-			let quantity = 0;
 			if (summCoinsBeforeOrders && isBuyerBeforeOrders) {
 				quantity = +summCoinsBeforeOrders.toFixed(roundRate);
 				await sell(quantity, 'active Founds');
@@ -53,12 +52,11 @@ async function placeOrder(signal, isDivergence) {
 				return;
 			}
 			const quantityCoinInWallet = +(await getBalance(firstCoin));
-			const rate = +(quantityCoinInWallet * interestRate).toFixed(roundRate);
-			sell(rate, 'new trend');
+			quantity = +(quantityCoinInWallet * interestRate).toFixed(roundRate);
+			sell(quantity, 'new trend');
 		}
 		if (signal === 'long') {
 			console.log('long', price);
-			let quantity = 0;
 			if (summCoinsBeforeOrders && !isBuyerBeforeOrders) {
 				quantity = +summCoinsBeforeOrders.toFixed(roundRate);
 				await buy(quantity, 'active Founds');
@@ -79,8 +77,8 @@ async function placeOrder(signal, isDivergence) {
 				return;
 			}
 			const quantityCoinInWallet = +(await getBalance(firstCoin));
-			const rate = +(quantityCoinInWallet * interestRate).toFixed(roundRate);
-			buy(rate, 'new trend');
+			quantity = +(quantityCoinInWallet * interestRate).toFixed(roundRate);
+			buy(quantity, 'new trend');
 		}
 	} catch (e) {
 		console.log('error function PlaceOrder');

@@ -8,23 +8,13 @@ const getPriceNow = require('./getPriceNow');
 
 const buy = async (quantity, text) => {
 	try {
-		const price = getPriceNow();
 		console.log(quantity, text);
-		return new Promise(() => {
-			binance.marketBuy(pair, quantity);
-			console.log('🚀 result Buy', result);
-			const message = `\n ${new Date().toLocaleString()} \n Buy ${text}: ${pair} \n Quantity: ${quantity} \n	Price: ${price}`;
-			sendInTelegram(message);
-			writeLog('log.txt', message);
-		});
-
-		// const result = await binance.marketBuy(pair, quantity);
-		// console.log('🚀 result Buy', result);
-		// const message = `\n ${new Date().toLocaleString()} \n Buy ${text}: ${pair} \n Quantity: ${quantity} \n	Price: ${
-		// 	result.fills[0].price
-		// }`;
-		// sendInTelegram(message);
-		// writeLog('log.txt', message);
+		const price = await getPriceNow();
+		const result = await binance.marketBuy(pair, quantity);
+		console.log('🚀 result Buy', result);
+		const message = `\n ${new Date().toLocaleString()} \n Buy ${text}: ${pair} \n Quantity: ${quantity} \n	Price: ${price}`;
+		sendInTelegram(message);
+		writeLog('log.txt', message);
 	} catch (e) {
 		console.log('Error in function "MarketBuySell - buy ');
 
@@ -40,20 +30,13 @@ const buy = async (quantity, text) => {
 
 const sell = async (quantity, text) => {
 	try {
-		const price = getPriceNow();
 		console.log(quantity, text);
-		return new Promise(() => {
-			binance.marketSell(pair, quantity);
-			console.log('🚀 result Sell', result);
-			const message = `Sell ${text}: ${pair} \n Quantity: ${quantity} \n	Price: ${price}`;
-			sendInTelegram(message);
-			writeLog('log.txt', message);
-		});
-
-		// console.log('🚀 result Sell', result);
-		// const message = `Sell ${text}: ${pair} \n Quantity: ${quantity} \n	Price: ${result.fills[0].price}`;
-		// sendInTelegram(message);
-		// writeLog('log.txt', message);
+		const price = await getPriceNow();
+		const result = await binance.marketSell(pair, quantity);
+		console.log('🚀 result Sell', result);
+		const message = `Sell ${text}: ${pair} \n Quantity: ${quantity} \n	Price: ${price}`;
+		sendInTelegram(message);
+		writeLog('log.txt', message);
 	} catch (e) {
 		console.log('Error in function "MarketBuySell - sell ');
 		writeLog(
@@ -65,5 +48,4 @@ const sell = async (quantity, text) => {
 		}, 10000);
 	}
 };
-
 module.exports = { buy, sell };
